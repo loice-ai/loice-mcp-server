@@ -2,8 +2,7 @@
 
 An [Agent Plugins](https://agent-plugins.org/) package (spec **1.0.0**) for
 [Loice](https://loice.ai). It gives an AI agent B2B lead search, a company's employees,
-verified work emails, email and LinkedIn enrichment, and ideal-customer profiles built from a
-website.
+verified work emails, email and LinkedIn enrichment, and lead lists.
 
 ## What's inside
 

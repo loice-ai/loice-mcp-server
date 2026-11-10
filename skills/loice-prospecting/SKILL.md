@@ -1,19 +1,18 @@
 ---
 name: loice-prospecting
-description: Find B2B leads, a company's decision makers, verified work emails and ideal-customer profiles with the Loice MCP server. Use when the user wants prospects or a lead list, people at a company, someone's work email, to enrich an email or LinkedIn profile, or to work out who to sell to from a website. Covers quoting points before spending, polling runs, paging results and saving to lead lists.
+description: Find B2B leads, a company's decision makers, verified work emails and enrichment with the Loice MCP server. Use when the user wants prospects or a lead list, people at a company, someone's work email, or to enrich an email or LinkedIn profile. Covers quoting points before spending, polling runs, paging results and saving to lead lists.
 license: MIT
 compatibility: Needs the Loice MCP server from this plugin (https://app.loice.ai/mcp), a Loice account and network access.
 metadata:
   author: loice
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # Loice prospecting
 
 Loice is a hosted MCP server. It finds and verifies B2B contacts: lead search, a company's
-employees, verified work emails, email enrichment, LinkedIn profiles, and ideal-customer
-profiles (ICPs) built from a website. The first connection opens a browser for Loice sign-in
-(OAuth). Nothing needs to be pasted.
+employees, verified work emails, email enrichment and LinkedIn profiles. The first connection
+opens a browser for Loice sign-in (OAuth). Nothing needs to be pasted.
 
 ## Rules that always apply
 
@@ -79,18 +78,6 @@ profiles (ICPs) built from a website. The first connection opens a browser for L
 - `find_email` may answer `searching`. Call it again with the same arguments after
   `retry_after_seconds`.
 - Quote the total for the whole batch, then run it after the user's yes.
-
-### Work out who to sell to (ICP Builder)
-
-Everything before generation is free.
-
-1. `analyze_website` with the user's company site.
-2. `get_icp_analysis` with `wait_seconds` until it answers. Show the proposed profiles.
-   `preview_icp_profile` shows sample people for one profile.
-3. `find_icp_leads`, then `get_icp_analysis` again for the lead counts.
-4. `generate_lead_lists` with `dry_run: true`. After the user's yes, run it with
-   `expected_points` set to the quote.
-5. `get_icp_generation` until the lists are ready.
 
 ## Docs
 
