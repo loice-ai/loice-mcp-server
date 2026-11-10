@@ -8,7 +8,7 @@
     "url": "https://loice.ai"
   },
   "homepage": "https://docs.loice.ai/mcp-server",
-  "repository": "https://github.com/loice-ai/loice-mcp-plugin",
+  "repository": "https://github.com/loice-ai/loice-mcp-server",
   "license": "MIT",
   "keywords": ["mcp", "leads", "b2b", "prospecting", "email-finder", "enrichment", "sales", "icp"]
 }
