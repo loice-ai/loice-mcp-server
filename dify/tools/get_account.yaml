@@ -1,0 +1,15 @@
+identity:
+  name: get_account
+  author: loice
+  label:
+    en_US: "Account, balance and prices"
+    zh_Hans: "账户、余额与价格"
+description:
+  human:
+    en_US: "Workspace, points balance, live prices of every billed tool and rate limits."
+    zh_Hans: "账户、余额与价格"
+  llm: "Shows the Loice workspace: points balance, the live price of every billed tool, what was spent today, permissions and rate limits. Free. Call it first, and whenever you need to tell the user what something will cost."
+parameters: []
+extra:
+  python:
+    source: tools/get_account.py

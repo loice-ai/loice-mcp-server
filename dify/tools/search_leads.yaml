@@ -1,0 +1,169 @@
+identity:
+  name: search_leads
+  author: loice
+  label:
+    en_US: "Search for leads"
+    zh_Hans: "搜索潜在客户"
+description:
+  human:
+    en_US: "Find B2B people by title, company, location, industry, seniority and more."
+    zh_Hans: "搜索潜在客户"
+  llm: "Finds people by job title, company, location, headcount, industry, seniority, function or keywords, delivering up to `count` as a background run. Billed per lead DELIVERED (none delivered = free; live price in get_account). Returns a run_id at once: poll get_run, read rows with get_results (25 per page), save with add_to_lead_list. dry_run: true quotes the maximum. One run per workspace at a time; for more rows page or use continue_from_run_id, never search again. At least one filter is required unless continue_from_run_id is given. Several values: separate them with ';' or new lines, or pass a JSON array."
+parameters:
+  - name: job_title
+    type: string
+    required: false
+    label:
+      en_US: "Job titles"
+      zh_Hans: "职位"
+    human_description:
+      en_US: "Current job titles, e.g. \"Head of Sales\". Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Current job titles, e.g. \"Head of Sales\". Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Current job titles, e.g. \"Head of Sales\". Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: company
+    type: string
+    required: false
+    label:
+      en_US: "Companies"
+      zh_Hans: "公司"
+    human_description:
+      en_US: "Company names. Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Company names. Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Company names. Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: location
+    type: string
+    required: false
+    label:
+      en_US: "Locations"
+      zh_Hans: "地点"
+    human_description:
+      en_US: "Locations, e.g. \"Germany\" or \"Berlin\". Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Locations, e.g. \"Germany\" or \"Berlin\". Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Locations, e.g. \"Germany\" or \"Berlin\". Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: industry
+    type: string
+    required: false
+    label:
+      en_US: "Industries"
+      zh_Hans: "行业"
+    human_description:
+      en_US: "LinkedIn industry labels, e.g. \"Software Development\" (exact labels: list_filter_values). Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "LinkedIn industry labels, e.g. \"Software Development\" (exact labels: list_filter_values). Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "LinkedIn industry labels, e.g. \"Software Development\" (exact labels: list_filter_values). Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: seniority_level
+    type: string
+    required: false
+    label:
+      en_US: "Seniority"
+      zh_Hans: "职级"
+    human_description:
+      en_US: "Seniority levels, one of: In Training, Entry Level, Senior, Strategic, Entry Level Manager, Experienced Manager, Director, Vice President, CXO, Owner / Partner. Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Seniority levels, one of: In Training, Entry Level, Senior, Strategic, Entry Level Manager, Experienced Manager, Director, Vice President, CXO, Owner / Partner. Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Seniority levels, one of: In Training, Entry Level, Senior, Strategic, Entry Level Manager, Experienced Manager, Director, Vice President, CXO, Owner / Partner. Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: function
+    type: string
+    required: false
+    label:
+      en_US: "Functions"
+      zh_Hans: "职能"
+    human_description:
+      en_US: "Job functions (departments), e.g. Engineering, Sales, Marketing (exact labels: list_filter_values). Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Job functions (departments), e.g. Engineering, Sales, Marketing (exact labels: list_filter_values). Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Job functions (departments), e.g. Engineering, Sales, Marketing (exact labels: list_filter_values). Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: headcount
+    type: string
+    required: false
+    label:
+      en_US: "Company headcount"
+      zh_Hans: "公司规模"
+    human_description:
+      en_US: "Headcount buckets, one of: Self-employed, 1-10, 11-50, 51-200, 201-500, 501-1000, 1001-5000, 5001-10000, 10001+. Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Headcount buckets, one of: Self-employed, 1-10, 11-50, 51-200, 201-500, 501-1000, 1001-5000, 5001-10000, 10001+. Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Headcount buckets, one of: Self-employed, 1-10, 11-50, 51-200, 201-500, 501-1000, 1001-5000, 5001-10000, 10001+. Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: years_experience
+    type: string
+    required: false
+    label:
+      en_US: "Years of experience"
+      zh_Hans: "工作年限"
+    human_description:
+      en_US: "Buckets, one of: Less than 1 year, 1-2 years, 3-5 years, 6-10 years, 11-15 years, 16-20 years, 20+ years. Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Buckets, one of: Less than 1 year, 1-2 years, 3-5 years, 6-10 years, 11-15 years, 16-20 years, 20+ years. Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Buckets, one of: Less than 1 year, 1-2 years, 3-5 years, 6-10 years, 11-15 years, 16-20 years, 20+ years. Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: keywords
+    type: string
+    required: false
+    label:
+      en_US: "Keywords"
+      zh_Hans: "关键词"
+    human_description:
+      en_US: "Free keywords (LinkedIn search operators work). Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Free keywords (LinkedIn search operators work). Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Free keywords (LinkedIn search operators work). Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: people
+    type: string
+    required: false
+    label:
+      en_US: "People hints"
+      zh_Hans: "人员描述"
+    human_description:
+      en_US: "Free-text hints about the people sought. Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Free-text hints about the people sought. Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Free-text hints about the people sought. Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: count
+    type: number
+    required: false
+    label:
+      en_US: "Count"
+      zh_Hans: "数量"
+    human_description:
+      en_US: "How many leads to deliver (1-10000, default 25). Charged per lead delivered."
+      zh_Hans: "How many leads to deliver (1-10000, default 25). Charged per lead delivered."
+    llm_description: "How many leads to deliver (1-10000, default 25). Charged per lead delivered."
+    form: llm
+  - name: continue_from_run_id
+    type: string
+    required: false
+    label:
+      en_US: "Continue from run"
+      zh_Hans: "继续运行"
+    human_description:
+      en_US: "Continue a finished run (\"more like this\"): never re-delivers or re-charges its leads."
+      zh_Hans: "Continue a finished run (\"more like this\"): never re-delivers or re-charges its leads."
+    llm_description: "Continue a finished run (\"more like this\"): never re-delivers or re-charges its leads."
+    form: llm
+  - name: dry_run
+    type: boolean
+    required: false
+    label:
+      en_US: "Dry run"
+      zh_Hans: "仅报价"
+    human_description:
+      en_US: "Quote only: returns the exact price and charges nothing."
+      zh_Hans: "Quote only: returns the exact price and charges nothing."
+    llm_description: "Quote only: returns the exact price and charges nothing."
+    form: llm
+  - name: idempotency_key
+    type: string
+    required: false
+    label:
+      en_US: "Idempotency key"
+      zh_Hans: "幂等键"
+    human_description:
+      en_US: "Optional. A retry with the same key is never charged twice."
+      zh_Hans: "Optional. A retry with the same key is never charged twice."
+    llm_description: "Optional. A retry with the same key is never charged twice."
+    form: llm
+extra:
+  python:
+    source: tools/search_leads.py

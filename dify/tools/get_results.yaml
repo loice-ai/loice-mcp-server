@@ -1,0 +1,37 @@
+identity:
+  name: get_results
+  author: loice
+  label:
+    en_US: "Read results"
+    zh_Hans: "读取结果"
+description:
+  human:
+    en_US: "Reads the people of a run or a lead list, 25 per page."
+    zh_Hans: "读取结果"
+  llm: "Reads the people behind a handle, 25 per page: \"run:<run_id>\" (a search) or \"list:<list_id>\" (a lead list); pass the returned next_cursor as cursor for more. Free. Do-not-contact people are never returned. Row ids go to add_to_lead_list. Rows have no email unless already bought: use find_email mode \"linkedin\" with the row's LinkedIn URL."
+parameters:
+  - name: handle
+    type: string
+    required: true
+    label:
+      en_US: "Handle"
+      zh_Hans: "句柄"
+    human_description:
+      en_US: "\"run:<run_id>\" or \"list:<list_id>\"."
+      zh_Hans: "\"run:<run_id>\" or \"list:<list_id>\"."
+    llm_description: "\"run:<run_id>\" or \"list:<list_id>\"."
+    form: llm
+  - name: cursor
+    type: string
+    required: false
+    label:
+      en_US: "Cursor"
+      zh_Hans: "游标"
+    human_description:
+      en_US: "next_cursor from the previous page."
+      zh_Hans: "next_cursor from the previous page."
+    llm_description: "next_cursor from the previous page."
+    form: llm
+extra:
+  python:
+    source: tools/get_results.py

@@ -1,0 +1,103 @@
+identity:
+  name: find_employees
+  author: loice
+  label:
+    en_US: "Find a company's employees"
+    zh_Hans: "查找公司员工"
+description:
+  human:
+    en_US: "Current employees of one company, by title, seniority, department and location."
+    zh_Hans: "查找公司员工"
+  llm: "Finds current employees of ONE company (website domain or LinkedIn company URL), optionally by title, seniority, department and location. Billed once for the company when a source answered, plus per employee DELIVERED (live prices in get_account); an unavailable source is free. Background run: poll get_run, read with get_results. Company unknown: use search_leads. Several values: separate them with ';' or new lines, or pass a JSON array."
+parameters:
+  - name: company
+    type: string
+    required: true
+    label:
+      en_US: "Company"
+      zh_Hans: "公司"
+    human_description:
+      en_US: "The company website domain (acme.io) or its LinkedIn company URL."
+      zh_Hans: "The company website domain (acme.io) or its LinkedIn company URL."
+    llm_description: "The company website domain (acme.io) or its LinkedIn company URL."
+    form: llm
+  - name: count
+    type: number
+    required: true
+    label:
+      en_US: "Count"
+      zh_Hans: "数量"
+    human_description:
+      en_US: "How many employees to deliver at most (1-2500)."
+      zh_Hans: "How many employees to deliver at most (1-2500)."
+    llm_description: "How many employees to deliver at most (1-2500)."
+    form: llm
+  - name: title
+    type: string
+    required: false
+    label:
+      en_US: "Titles"
+      zh_Hans: "职位"
+    human_description:
+      en_US: "Job titles. Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Job titles. Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Job titles. Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: seniority
+    type: string
+    required: false
+    label:
+      en_US: "Seniority"
+      zh_Hans: "职级"
+    human_description:
+      en_US: "One of: In Training, Entry Level, Senior, Strategic, Entry Level Manager, Experienced Manager, Director, Vice President, CXO, Owner / Partner. Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "One of: In Training, Entry Level, Senior, Strategic, Entry Level Manager, Experienced Manager, Director, Vice President, CXO, Owner / Partner. Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "One of: In Training, Entry Level, Senior, Strategic, Entry Level Manager, Experienced Manager, Director, Vice President, CXO, Owner / Partner. Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: department
+    type: string
+    required: false
+    label:
+      en_US: "Departments"
+      zh_Hans: "部门"
+    human_description:
+      en_US: "Departments, e.g. Engineering, Sales (exact labels: list_filter_values key function). Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Departments, e.g. Engineering, Sales (exact labels: list_filter_values key function). Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Departments, e.g. Engineering, Sales (exact labels: list_filter_values key function). Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: location
+    type: string
+    required: false
+    label:
+      en_US: "Locations"
+      zh_Hans: "地点"
+    human_description:
+      en_US: "Locations. Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Locations. Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Locations. Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: dry_run
+    type: boolean
+    required: false
+    label:
+      en_US: "Dry run"
+      zh_Hans: "仅报价"
+    human_description:
+      en_US: "Quote only: returns the exact price and charges nothing."
+      zh_Hans: "Quote only: returns the exact price and charges nothing."
+    llm_description: "Quote only: returns the exact price and charges nothing."
+    form: llm
+  - name: idempotency_key
+    type: string
+    required: false
+    label:
+      en_US: "Idempotency key"
+      zh_Hans: "幂等键"
+    human_description:
+      en_US: "Optional. A retry with the same key is never charged twice."
+      zh_Hans: "Optional. A retry with the same key is never charged twice."
+    llm_description: "Optional. A retry with the same key is never charged twice."
+    form: llm
+extra:
+  python:
+    source: tools/find_employees.py
