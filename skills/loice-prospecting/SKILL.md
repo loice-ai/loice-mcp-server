@@ -1,11 +1,11 @@
 ---
 name: loice-prospecting
-description: Find B2B leads, a company's decision makers and verified work emails with the Loice MCP server. Use when the user wants prospects or a lead list, people at a company, someone's work email, or to enrich an email or LinkedIn profile. Covers quoting points before spending, polling runs, paging results and saving to lead lists.
+description: Find B2B leads, a company's decision makers, verified work emails and enrichment with the Loice MCP server. Use when the user wants prospects or a lead list, people at a company, someone's work email, or to enrich an email or LinkedIn profile. Covers quoting points before spending, polling runs, paging results and saving to lead lists.
 license: MIT
 compatibility: Needs the Loice MCP server from this plugin (https://app.loice.ai/mcp), a Loice account and network access.
 metadata:
   author: loice
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # Loice prospecting

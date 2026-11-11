@@ -1,0 +1,37 @@
+identity:
+  name: list_lead_lists
+  author: loice
+  label:
+    en_US: "Lead lists"
+    zh_Hans: "潜在客户列表"
+description:
+  human:
+    en_US: "The workspace's lead lists with member counts."
+    zh_Hans: "潜在客户列表"
+  llm: "Lists the workspace's lead lists with their member counts, 25 per page. Read a list's people with get_results (handle \"list:<id>\"). Free."
+parameters:
+  - name: query
+    type: string
+    required: false
+    label:
+      en_US: "Search"
+      zh_Hans: "搜索"
+    human_description:
+      en_US: "Optional text to filter lists by name."
+      zh_Hans: "Optional text to filter lists by name."
+    llm_description: "Optional text to filter lists by name."
+    form: llm
+  - name: page
+    type: number
+    required: false
+    label:
+      en_US: "Page"
+      zh_Hans: "页码"
+    human_description:
+      en_US: "Page number (1-1000)."
+      zh_Hans: "Page number (1-1000)."
+    llm_description: "Page number (1-1000)."
+    form: llm
+extra:
+  python:
+    source: tools/list_lead_lists.py

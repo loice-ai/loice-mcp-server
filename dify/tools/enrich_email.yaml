@@ -1,0 +1,48 @@
+identity:
+  name: enrich_email
+  author: loice
+  label:
+    en_US: "Enrich an email address"
+    zh_Hans: "邮箱信息补全"
+description:
+  human:
+    en_US: "The person and company behind an email address."
+    zh_Hans: "邮箱信息补全"
+  llm: "Turns an email address into the person and company behind it (name, title, employer, LinkedIn, company profile), from sources that state them. Billed per completed lookup, found or not (live price in get_account); a provider outage is free."
+parameters:
+  - name: email
+    type: string
+    required: true
+    label:
+      en_US: "Email"
+      zh_Hans: "邮箱"
+    human_description:
+      en_US: "The email address to enrich."
+      zh_Hans: "The email address to enrich."
+    llm_description: "The email address to enrich."
+    form: llm
+  - name: dry_run
+    type: boolean
+    required: false
+    label:
+      en_US: "Dry run"
+      zh_Hans: "仅报价"
+    human_description:
+      en_US: "Quote only: returns the exact price and charges nothing."
+      zh_Hans: "Quote only: returns the exact price and charges nothing."
+    llm_description: "Quote only: returns the exact price and charges nothing."
+    form: llm
+  - name: idempotency_key
+    type: string
+    required: false
+    label:
+      en_US: "Idempotency key"
+      zh_Hans: "幂等键"
+    human_description:
+      en_US: "Optional. A retry with the same key is never charged twice."
+      zh_Hans: "Optional. A retry with the same key is never charged twice."
+    llm_description: "Optional. A retry with the same key is never charged twice."
+    form: llm
+extra:
+  python:
+    source: tools/enrich_email.py

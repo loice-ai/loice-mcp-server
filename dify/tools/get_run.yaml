@@ -1,0 +1,37 @@
+identity:
+  name: get_run
+  author: loice
+  label:
+    en_US: "Run status"
+    zh_Hans: "运行状态"
+description:
+  human:
+    en_US: "Status of a lead search or employee search run."
+    zh_Hans: "运行状态"
+  llm: "Status of a lead search or employee search run: queued, processing, completed, failed or cancelled; how many leads were delivered and what was charged. Pass wait_seconds (up to 25) to wait for progress instead of polling rapidly. Free."
+parameters:
+  - name: run_id
+    type: string
+    required: true
+    label:
+      en_US: "Run ID"
+      zh_Hans: "运行 ID"
+    human_description:
+      en_US: "The run_id from search_leads or find_employees."
+      zh_Hans: "The run_id from search_leads or find_employees."
+    llm_description: "The run_id from search_leads or find_employees."
+    form: llm
+  - name: wait_seconds
+    type: number
+    required: false
+    label:
+      en_US: "Wait seconds"
+      zh_Hans: "等待秒数"
+    human_description:
+      en_US: "Wait up to this many seconds (0-25) for progress instead of polling rapidly."
+      zh_Hans: "Wait up to this many seconds (0-25) for progress instead of polling rapidly."
+    llm_description: "Wait up to this many seconds (0-25) for progress instead of polling rapidly."
+    form: llm
+extra:
+  python:
+    source: tools/get_run.py

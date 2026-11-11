@@ -410,11 +410,13 @@ mid-way keeps what it delivered; `get_run` then adds `stopped_by` and `billing_u
 | [`mcp.json`](mcp.json) | The hosted Loice MCP server: `https://app.loice.ai/mcp` (Streamable HTTP) |
 | [`skills/loice-prospecting/`](skills/loice-prospecting/SKILL.md) | An Agent Skill with workflows and spending rules for the Loice tools |
 | `assets/icon.png`, `assets/icon.svg` | Plugin icon |
+| [`dify/`](dify/) | The [Dify](https://dify.ai) tool plugin (source of the Marketplace package) |
 
 ## Also available as
 
 - **MCP Registry:** `ai.loice/mcp` on
   [registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io/v0.1/servers?search=ai.loice/mcp)
+- **Dify plugin:** the [`dify/`](dify/) folder, a Dify tool plugin over the same server (API key)
 - **Direct URL:** add `https://app.loice.ai/mcp` as a remote MCP server in any client
 
 ## Docs

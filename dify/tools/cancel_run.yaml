@@ -1,0 +1,26 @@
+identity:
+  name: cancel_run
+  author: loice
+  label:
+    en_US: "Stop a run"
+    zh_Hans: "停止运行"
+description:
+  human:
+    en_US: "Stops a lead search or employee search run."
+    zh_Hans: "停止运行"
+  llm: "Stops a lead search or employee search run. Leads already delivered stay available and charged; nothing more is fetched or charged. Safe to call twice. Free."
+parameters:
+  - name: run_id
+    type: string
+    required: true
+    label:
+      en_US: "Run ID"
+      zh_Hans: "运行 ID"
+    human_description:
+      en_US: "The run to stop."
+      zh_Hans: "The run to stop."
+    llm_description: "The run to stop."
+    form: llm
+extra:
+  python:
+    source: tools/cancel_run.py
