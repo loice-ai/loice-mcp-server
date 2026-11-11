@@ -32,8 +32,22 @@ The server is hosted, so there is nothing to install or run locally. This reposi
 [Agent Plugins](https://agent-plugins.org/) package (spec **1.0.0**) for it: the server entry plus
 an [Agent Skill](https://agentskills.io/) that teaches an agent the workflows and spending rules.
 
+## Our data
+
+Live data, not a stale database. Lead search, the employee finder and the ICP Builder run on live
+sources at request time:
+
+| Source | Company profiles | Status |
+| --- | --- | --- |
+| **LinkedIn** | **70M+** | 🟢 Live |
+| **Google Maps** | **110M+** | 🟢 Live |
+| **Corporate registry** | **100M+** | 🟢 Live |
+
+An email is returned only when it is verified; otherwise the answer is "not found", never a guess.
+
 ## Contents
 
+- [Our data](#our-data)
 - [What you can ask](#what-you-can-ask)
 - [Quick start](#quick-start)
 - [Connect a client](#connect-a-client)
