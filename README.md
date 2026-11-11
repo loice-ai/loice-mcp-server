@@ -5,7 +5,7 @@
 <h1 align="center">Loice MCP server</h1>
 
 <p align="center">
-  B2B lead search, a company's employees, verified work emails, enrichment and ICP lead lists
+  B2B lead search, a company's employees, verified work emails and enrichment
   for Claude, ChatGPT, Cursor, VS Code, Gemini CLI or your own agent.
 </p>
 
@@ -20,8 +20,7 @@
 
 [Loice](https://loice.ai) runs a remote **MCP server**. An AI assistant that speaks the
 [Model Context Protocol](https://modelcontextprotocol.io) can search for leads, find a company's
-employees, find verified emails, enrich contacts, build ideal-customer profiles from a website and
-save people to your lead lists. It spends points from your workspace at the same prices as the
+employees, find verified emails, enrich contacts and save people to your lead lists. It spends points from your workspace at the same prices as the
 app and the API.
 
 ```text
@@ -34,7 +33,7 @@ an [Agent Skill](https://agentskills.io/) that teaches an agent the workflows an
 
 ## Our data
 
-Live data, not a stale database. Lead search, the employee finder and the ICP Builder run on live
+Live data, not a stale database. Lead search and the employee finder run on live
 sources at request time:
 
 | Source | Company profiles | Status |
@@ -70,7 +69,6 @@ Once connected, you work in plain language and the assistant picks the tools:
 - *"Find the work email of Satya Nadella at microsoft.com."*
 - *"What do we know about the person behind jane.doe@acme.io?"*
 - *"How many points do I have left, and what would 500 more leads from that search cost?"*
-- *"Analyse acme.io, tell me who we should sell to, and make lead lists for the best two profiles."*
 
 A good assistant quotes the cost of a large operation before running it; the server tells it to.
 
@@ -249,7 +247,7 @@ per-connection spend cap and no confirmation threshold: the workspace balance is
 | Permission | What it allows | Spends points |
 | --- | --- | --- |
 | `loice:read` | Balance, prices, your lists and the results of searches already run | No |
-| `loice:search` | Run lead searches and find a company's employees; stop a run; use the ICP Builder | Yes |
+| `loice:search` | Run lead searches and find a company's employees; stop a run | Yes |
 | `loice:enrich` | Find verified emails, enrich emails and find LinkedIn profiles | Yes |
 | `loice:lists` | Add people to your lead lists | No |
 
@@ -291,12 +289,6 @@ your password. Revoke an API key under **Settings → API**.
 | `find_email` | A verified work email from a name and company, or not found | `loice:enrich` | Per lookup |
 | `enrich_email` | The person and company behind an email address | `loice:enrich` | Per lookup |
 | `find_linkedin_profile` | A LinkedIn profile that states the name and employer | `loice:enrich` | Per search |
-| `analyze_website` | Starts an [ICP Builder](https://docs.loice.ai/icp-builder) analysis of a website | `loice:search` | No |
-| `get_icp_analysis` | The analysis: site, products, use cases, profiles and their cards; can wait up to 25 s | `loice:search` | No |
-| `find_icp_leads` | Builds filters and a lead count for the selected profiles | `loice:search` | No |
-| `preview_icp_profile` | Up to 25 sample people for a profile's card | `loice:search` | No |
-| `generate_lead_lists` | One lead list per selected card, filled in the background | `loice:search` | Per lead added (+ per email) |
-| `get_icp_generation` | Progress of the lists being generated; can wait up to 25 s | `loice:search` | No |
 | `list_lead_lists` | Your lead lists | `loice:read` | No |
 | `add_to_lead_list` | Save people from a run to a list | `loice:lists` | No |
 
@@ -323,12 +315,6 @@ read-only, so assistants that honour tool annotations ask before calling them.
 **Emails.** Search results carry no email unless your workspace already bought it. To get emails
 for people from a search, the assistant calls `find_email` in `linkedin` mode with each person's
 LinkedIn URL, after quoting the total. It never guesses or constructs an address.
-
-**ICP Builder.** `analyze_website` answers at once and the assistant waits with
-`get_icp_analysis` until the profiles are in; `find_icp_leads` builds the cards and their counts;
-`generate_lead_lists` is quoted with `dry_run: true` and then run at that quote
-(`expected_points`). Analysis, cards and previews are free; the generation charges per lead its
-lists add.
 
 ### A typical session
 
@@ -374,16 +360,15 @@ the most a call can charge (`billing.quote_points`) and charges nothing.
 
 - **Spending:** the workspace balance is the only limit. A call the balance cannot cover answers
   `insufficient_credits` and is not charged.
-- **One search at a time:** a workspace runs one lead or employee search, and one ICP list
-  generation, at a time (`run_already_active`, `generation_active`). Follow it with `get_run` or
-  `get_icp_generation`, or stop a run with `cancel_run`.
+- **One search at a time:** a workspace runs one lead or employee search at a time
+  (`run_already_active`). Follow it with `get_run`, or stop it with `cancel_run`.
 - **Request budgets:** each tool family has a per-workspace request budget, shared with the app
   and the API (see [Rate limits](https://docs.loice.ai/rate-limits)); `get_account` lists them
   under `limits`. A spent budget answers `rate_limited` with `retry_after_seconds`, before any
   billable work, and is never charged.
 - **Sizes:** `get_results` and `list_lead_lists` return 25 rows per page; `search_leads` delivers
-  up to 10,000 leads per run; `add_to_lead_list` takes up to 500 rows per call; `get_run`,
-  `get_icp_analysis` and `get_icp_generation` wait at most 25 seconds.
+  up to 10,000 leads per run; `add_to_lead_list` takes up to 500 rows per call; `get_run` waits at most
+  25 seconds.
 
 ## Errors
 
@@ -398,11 +383,6 @@ The codes are the API's (see [Errors](https://docs.loice.ai/errors)) plus:
 | `insufficient_credits` | The balance cannot cover the call. Not charged; `retryable` is false. |
 | `insufficient_scope` | The connection was not granted the permission this tool needs. |
 | `provider_unavailable` | A data provider did not answer. Not charged; `retryable` says whether retrying can help (a blocked page is not retryable: use `search_leads` with the company name). |
-| `analysis_not_ready` | The ICP analysis has not answered yet; wait with `get_icp_analysis`. Retryable. |
-| `filters_edited` | Rebuilding a card would replace filters you edited in the app; call `find_icp_leads` again with `edited: "keep"` or `"replace"`. |
-| `nothing_to_generate` | No selected ICP card has leads to put in a list. |
-| `generation_active` | Lists are already being generated in this workspace; follow it with `get_icp_generation`. Retryable. |
-| `estimate_changed` | The generation's quote moved since `expected_points` was quoted; quote again. Not charged. |
 
 `card_required`, `trial_ended` and `insufficient_credits` say what to do in `message` and carry
 the Billing page in `details.url`, with `details.action` (`attach_card`, `choose_plan`,
