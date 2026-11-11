@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "loice",
   "version": "1.0.0",
-  "description": "B2B lead search, company employees, verified work emails, enrichment and ICP-based lead lists from Loice, over its hosted MCP server.",
+  "description": "B2B lead search, company employees, verified work emails and enrichment from Loice, over its hosted MCP server.",
   "author": {
     "name": "Loice",
     "url": "https://loice.ai"
@@ -10,5 +10,5 @@
   "homepage": "https://docs.loice.ai/mcp-server",
   "repository": "https://github.com/loice-ai/loice-mcp-server",
   "license": "MIT",
-  "keywords": ["mcp", "leads", "b2b", "prospecting", "email-finder", "enrichment", "sales", "icp"]
+  "keywords": ["mcp", "leads", "b2b", "prospecting", "email-finder", "enrichment", "sales"]
 }
