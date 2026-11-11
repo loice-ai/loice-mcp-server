@@ -1,0 +1,70 @@
+identity:
+  name: find_linkedin_profile
+  author: loice
+  label:
+    en_US: "Find a LinkedIn profile"
+    zh_Hans: "查找 LinkedIn 资料"
+description:
+  human:
+    en_US: "A person's LinkedIn profile from their name and employer."
+    zh_Hans: "查找 LinkedIn 资料"
+  llm: "Finds a person's LinkedIn profile from their name and employer. Accepts the first profile result only when it STATES both the name and the company; otherwise not found, never a look-alike. Billed per completed search (live price in get_account); a provider outage is free."
+parameters:
+  - name: first_name
+    type: string
+    required: true
+    label:
+      en_US: "First name"
+      zh_Hans: "名"
+    human_description:
+      en_US: "First name of the person."
+      zh_Hans: "First name of the person."
+    llm_description: "First name of the person."
+    form: llm
+  - name: last_name
+    type: string
+    required: true
+    label:
+      en_US: "Last name"
+      zh_Hans: "姓"
+    human_description:
+      en_US: "Last name of the person."
+      zh_Hans: "Last name of the person."
+    llm_description: "Last name of the person."
+    form: llm
+  - name: company
+    type: string
+    required: false
+    label:
+      en_US: "Company"
+      zh_Hans: "公司"
+    human_description:
+      en_US: "Employer name, to tell matching profiles apart."
+      zh_Hans: "Employer name, to tell matching profiles apart."
+    llm_description: "Employer name, to tell matching profiles apart."
+    form: llm
+  - name: dry_run
+    type: boolean
+    required: false
+    label:
+      en_US: "Dry run"
+      zh_Hans: "仅报价"
+    human_description:
+      en_US: "Quote only: returns the exact price and charges nothing."
+      zh_Hans: "Quote only: returns the exact price and charges nothing."
+    llm_description: "Quote only: returns the exact price and charges nothing."
+    form: llm
+  - name: idempotency_key
+    type: string
+    required: false
+    label:
+      en_US: "Idempotency key"
+      zh_Hans: "幂等键"
+    human_description:
+      en_US: "Optional. A retry with the same key is never charged twice."
+      zh_Hans: "Optional. A retry with the same key is never charged twice."
+    llm_description: "Optional. A retry with the same key is never charged twice."
+    form: llm
+extra:
+  python:
+    source: tools/find_linkedin_profile.py

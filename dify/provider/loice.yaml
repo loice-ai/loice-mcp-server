@@ -1,0 +1,45 @@
+identity:
+  author: loice
+  name: loice
+  label:
+    en_US: Loice
+    zh_Hans: Loice
+  description:
+    en_US: B2B lead search, a company's employees, verified work emails, email and LinkedIn enrichment and lead lists.
+    zh_Hans: B2B 潜在客户搜索、公司员工、已验证的工作邮箱、邮箱与 LinkedIn 信息补全和潜在客户列表。
+  icon: icon.svg
+  tags:
+    - business
+    - search
+credentials_for_provider:
+  loice_api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: Loice API key
+      zh_Hans: Loice API 密钥
+    placeholder:
+      en_US: loice_sk_...
+      zh_Hans: loice_sk_...
+    help:
+      en_US: Create a key in the Loice app under Settings → API.
+      zh_Hans: 在 Loice 应用的 设置 → API 中创建密钥。
+    url: https://app.loice.ai
+tools:
+  - tools/get_account.yaml
+  - tools/list_filter_values.yaml
+  - tools/search_leads.yaml
+  - tools/find_employees.yaml
+  - tools/get_run.yaml
+  - tools/cancel_run.yaml
+  - tools/get_results.yaml
+  - tools/list_lead_lists.yaml
+  - tools/add_to_lead_list.yaml
+  - tools/find_email.yaml
+  - tools/enrich_email.yaml
+  - tools/find_linkedin_profile.yaml
+
+
+extra:
+  python:
+    source: provider/loice.py

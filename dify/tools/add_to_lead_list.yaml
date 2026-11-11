@@ -1,0 +1,48 @@
+identity:
+  name: add_to_lead_list
+  author: loice
+  label:
+    en_US: "Save people to a list"
+    zh_Hans: "保存到列表"
+description:
+  human:
+    en_US: "Saves people from a run to a lead list."
+    zh_Hans: "保存到列表"
+  llm: "Saves people from a run to a lead list: result_ids are row ids from get_results. Give list_id, or new_list_name to create the list. Do-not-contact people are refused (counted as suppressed). Free; saving twice is harmless. Several values: separate them with ';' or new lines, or pass a JSON array."
+parameters:
+  - name: result_ids
+    type: string
+    required: true
+    label:
+      en_US: "Row IDs"
+      zh_Hans: "行 ID"
+    human_description:
+      en_US: "Row ids from get_results (1-500). Several values: separate them with ';' or new lines, or pass a JSON array."
+      zh_Hans: "Row ids from get_results (1-500). Several values: separate them with ';' or new lines, or pass a JSON array."
+    llm_description: "Row ids from get_results (1-500). Several values: separate them with ';' or new lines, or pass a JSON array."
+    form: llm
+  - name: list_id
+    type: string
+    required: false
+    label:
+      en_US: "List ID"
+      zh_Hans: "列表 ID"
+    human_description:
+      en_US: "An existing list's id."
+      zh_Hans: "An existing list's id."
+    llm_description: "An existing list's id."
+    form: llm
+  - name: new_list_name
+    type: string
+    required: false
+    label:
+      en_US: "New list name"
+      zh_Hans: "新列表名称"
+    human_description:
+      en_US: "Creates a list with this name."
+      zh_Hans: "Creates a list with this name."
+    llm_description: "Creates a list with this name."
+    form: llm
+extra:
+  python:
+    source: tools/add_to_lead_list.py

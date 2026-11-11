@@ -1,0 +1,95 @@
+identity:
+  name: find_email
+  author: loice
+  label:
+    en_US: "Find a verified work email"
+    zh_Hans: "查找已验证的工作邮箱"
+description:
+  human:
+    en_US: "A person's verified work email, from name + company or a LinkedIn URL."
+    zh_Hans: "查找已验证的工作邮箱"
+  llm: "Finds a person's VERIFIED work email, or not found, never a guess. Modes: \"email\" (name + company domain); \"company\" (name + company NAME, resolved to its domain first); \"linkedin\" (LinkedIn profile url) for search_leads / find_employees rows. Billed per completed lookup (live prices in get_account); a completed miss is charged, an outage is free, an address the workspace already bought is free. If it answers `searching`, call again with the same arguments after retry_after_seconds; nothing is charged until the answer is delivered."
+parameters:
+  - name: mode
+    type: select
+    required: false
+    label:
+      en_US: "Mode"
+      zh_Hans: "模式"
+    human_description:
+      en_US: "email: name + company domain; company: name + company name; linkedin: LinkedIn profile URL."
+      zh_Hans: "email: name + company domain; company: name + company name; linkedin: LinkedIn profile URL."
+    llm_description: "email: name + company domain; company: name + company name; linkedin: LinkedIn profile URL."
+    form: llm
+    default: email
+    options:
+      - value: email
+        label:
+          en_US: "email"
+          zh_Hans: "email"
+      - value: company
+        label:
+          en_US: "company"
+          zh_Hans: "company"
+      - value: linkedin
+        label:
+          en_US: "linkedin"
+          zh_Hans: "linkedin"
+  - name: name
+    type: string
+    required: false
+    label:
+      en_US: "Full name"
+      zh_Hans: "姓名"
+    human_description:
+      en_US: "Full name of the person (email and company modes)."
+      zh_Hans: "Full name of the person (email and company modes)."
+    llm_description: "Full name of the person (email and company modes)."
+    form: llm
+  - name: company
+    type: string
+    required: false
+    label:
+      en_US: "Company"
+      zh_Hans: "公司"
+    human_description:
+      en_US: "email mode: the company domain or website; company mode: the company name."
+      zh_Hans: "email mode: the company domain or website; company mode: the company name."
+    llm_description: "email mode: the company domain or website; company mode: the company name."
+    form: llm
+  - name: url
+    type: string
+    required: false
+    label:
+      en_US: "LinkedIn URL"
+      zh_Hans: "LinkedIn 链接"
+    human_description:
+      en_US: "LinkedIn profile URL (linkedin mode)."
+      zh_Hans: "LinkedIn profile URL (linkedin mode)."
+    llm_description: "LinkedIn profile URL (linkedin mode)."
+    form: llm
+  - name: dry_run
+    type: boolean
+    required: false
+    label:
+      en_US: "Dry run"
+      zh_Hans: "仅报价"
+    human_description:
+      en_US: "Quote only: returns the exact price and charges nothing."
+      zh_Hans: "Quote only: returns the exact price and charges nothing."
+    llm_description: "Quote only: returns the exact price and charges nothing."
+    form: llm
+  - name: idempotency_key
+    type: string
+    required: false
+    label:
+      en_US: "Idempotency key"
+      zh_Hans: "幂等键"
+    human_description:
+      en_US: "Optional. A retry with the same key is never charged twice."
+      zh_Hans: "Optional. A retry with the same key is never charged twice."
+    llm_description: "Optional. A retry with the same key is never charged twice."
+    form: llm
+extra:
+  python:
+    source: tools/find_email.py

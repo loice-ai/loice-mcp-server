@@ -1,0 +1,58 @@
+identity:
+  name: list_filter_values
+  author: loice
+  label:
+    en_US: "List filter values"
+    zh_Hans: "列出筛选值"
+description:
+  human:
+    en_US: "The exact labels a search filter accepts."
+    zh_Hans: "列出筛选值"
+  llm: "Lists the exact labels a search filter accepts (for find_employees: seniority = seniorityLevel, department = function). For industry pass query (e.g. \"software\") to search all 434 labels; without it: the top-level sectors. Free."
+parameters:
+  - name: key
+    type: select
+    required: true
+    label:
+      en_US: "Filter"
+      zh_Hans: "筛选项"
+    human_description:
+      en_US: "Which filter's values to list."
+      zh_Hans: "Which filter's values to list."
+    llm_description: "Which filter's values to list."
+    form: llm
+    options:
+      - value: industry
+        label:
+          en_US: "industry"
+          zh_Hans: "industry"
+      - value: function
+        label:
+          en_US: "function"
+          zh_Hans: "function"
+      - value: seniorityLevel
+        label:
+          en_US: "seniorityLevel"
+          zh_Hans: "seniorityLevel"
+      - value: headcount
+        label:
+          en_US: "headcount"
+          zh_Hans: "headcount"
+      - value: yearsExperience
+        label:
+          en_US: "yearsExperience"
+          zh_Hans: "yearsExperience"
+  - name: query
+    type: string
+    required: false
+    label:
+      en_US: "Search"
+      zh_Hans: "搜索"
+    human_description:
+      en_US: "Optional text to search the labels (industry)."
+      zh_Hans: "Optional text to search the labels (industry)."
+    llm_description: "Optional text to search the labels (industry)."
+    form: llm
+extra:
+  python:
+    source: tools/list_filter_values.py
