@@ -30,4 +30,4 @@ the records described in its privacy notice. Loice is the controller of that pro
 [Loice Privacy Center](https://loice.ai/privacy-center/) for the policy, data-subject rights and
 opt-out.
 
-Contact: sales@loice.ai
+Contact: welcome@loice.ai
