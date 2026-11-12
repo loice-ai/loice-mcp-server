@@ -30,5 +30,6 @@ meta:
   minimum_dify_version: 1.0.0
 created_at: 2026-11-11T00:00:00Z
 privacy: PRIVACY.md
+contact: sales@loice.ai
 repo: https://github.com/loice-ai/loice-mcp-server
 verified: false
