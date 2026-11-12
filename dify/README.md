@@ -7,7 +7,7 @@ and workflows the tools of the hosted Loice MCP server (`https://app.loice.ai/mc
 a company's employees, verified work emails, email and LinkedIn enrichment and lead lists.
 
 - Source: https://github.com/loice-ai/loice-mcp-server (folder `dify/`)
-- Contact: sales@loice.ai
+- Contact: welcome@loice.ai
 - Docs: [MCP server](https://docs.loice.ai/mcp-server) (tools, prices, errors) ·
   [Plans and points](https://docs.loice.ai/plans-and-points)
 
